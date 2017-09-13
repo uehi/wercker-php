@@ -26,12 +26,18 @@ ENV COMPOSER_HOME /root/composer
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Install Deployer
+RUN curl -LO https://deployer.org/deployer.phar \
+    && mv deployer.phar /usr/local/bin/dep \
+    && chmod +x /usr/local/bin/dep
+
+
 RUN docker-php-ext-install \
     zip \
     bz2 \
     iconv \
     mcrypt \
     mbstring \
-    pdo_mysql 
+    pdo_mysql
 
 CMD ["php"]
